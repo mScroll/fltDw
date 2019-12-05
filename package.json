@@ -1,0 +1,9 @@
+﻿{
+"name": "mScroll/mScrollFltDw",
+"main": "fltdw.htm",
+"window":
+   {
+   "width": 900,
+   "height": 675
+   }
+}
