@@ -1,9 +1,10 @@
 # fltDw
 fltDw は、Web ブラウザで利用できる簡単な画像編集ツールです。  
-[GitHub リポジトリ](https://github.com/mScroll/fltDw)  
   
-動作の確認はこちらから行うことができます (オフラインの環境と異なり、画像のダウンロードに時間を要します)。  
-[fltDw](https://mscroll.github.io/fltDw/fltdw.htm)  
+・[GitHub リポジトリ](https://github.com/mScroll/fltDw)  
+  
+・[動作確認用リンク](https://mscroll.github.io/fltDw/fltdw.htm)  
+__注意:__　オフラインの環境と異なり、画像のダウンロードに時間を要します  
   
 ダウンロード、使用方法および更新履歴は次のリンクをご参照ください。  
 [fltDw - mScroll](https://www.mscroll.net/fltDw/)  
