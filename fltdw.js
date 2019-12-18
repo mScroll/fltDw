@@ -1,6 +1,6 @@
 ﻿/*
  * mScrollFltDw
- * 1.1.88.0
+ * 1.1.89.0
  * COPYRIGHT (c) 2017 mScroll
  */
 
@@ -23,6 +23,7 @@ var _CEIL = _MATH.ceil;
 var _FLOOR = _MATH.floor;
 var _DATE = _WINDOW.Date;
 var _UINT8ARRAY = _WINDOW.Uint8Array;
+var _IMAGE = _WINDOW.Image;
 var _DOCUMENT = _WINDOW.document;
 var _BODY = _DOCUMENT.body;
 var _CHARAT = "charAt";
@@ -63,6 +64,7 @@ var _PAGEX = "pageX";
 var _PAGEY = "pageY";
 var _BUTTON = "button";
 var _GETRANDOMVALUES = "getRandomValues";
+var _SRC0 = "src";
 var _UNDEFINED = _WINDOW.undefined;
 var _NULL = null;
 
@@ -245,6 +247,20 @@ var _PNGCUROFFSET1 = _NULL;
 var _PNGCUROFFSET2 = _NULL;
 var _PNGCUROFFSET3 = _NULL;
 var _CUREXT = ".cur";
+var _IMG_CACHE = [];
+
+   fltdw._cache = _IMG_CACHE;
+
+var _CACHE = function (Src_)
+   {
+   var u = new _IMAGE();
+
+   u[_SRC0] = Src_;
+   _IMG_CACHE[_IMG_CACHE[_LENGTH]] = u;
+
+   return (Src_);
+   };
+
 var _D3 = [];
 
    for (__s = 0; __s <= 768; ++ __s)
@@ -521,41 +537,41 @@ var _COLTYPESTR =
    ];
 var _COLTYPEIMG =
    [
-   "img/na.png",
-   "img/a.png",
+   _CACHE("img/na.png"),
+   _CACHE("img/a.png"),
    "img/na.png",
    "img/a.png"
    ];
 var _FILEIMG =
    [
-   "img/file0.png",
-   "img/file2.png"
+   _CACHE("img/file0.png"),
+   _CACHE("img/file2.png")
    ];
 var _LINEIMG =
    [
-   "img/line0.png",
-   "img/line2.png"
+   _CACHE("img/line0.png"),
+   _CACHE("img/line2.png")
    ];
 var _FILLIMG =
    [
-   "img/fill0.png",
-   "img/fill2.png"
+   _CACHE("img/fill0.png"),
+   _CACHE("img/fill2.png")
    ];
 var _RECTIMG =
    [
-   "img/sel0b.png",
-   "img/sel2b.png",
-   "img/sel0.png",
-   "img/sel2.png"
+   _CACHE("img/sel0b.png"),
+   _CACHE("img/sel2b.png"),
+   _CACHE("img/sel0.png"),
+   _CACHE("img/sel2.png")
    ];
 var _CURIMGS =
    [
    "img/ptr.png",
-   "img/cr.png",
-   "img/vt.png",
-   "img/rl.png",
-   "img/hz.png",
-   "img/lr.png",
+   _CACHE("img/cr.png"),
+   _CACHE("img/vt.png"),
+   _CACHE("img/rl.png"),
+   _CACHE("img/hz.png"),
+   _CACHE("img/lr.png"),
    "img/vt.png",
    "img/rl.png",
    "img/hz.png",
@@ -564,11 +580,11 @@ var _CURIMGS =
 var _CURIMG =
    [
    "img/dw" + _CUREXT,
-   "img/cr" + _CUREXT,
-   "img/vt" + _CUREXT,
-   "img/rl" + _CUREXT,
-   "img/hz" + _CUREXT,
-   "img/lr" + _CUREXT,
+   _CACHE("img/cr" + _CUREXT),
+   _CACHE("img/vt" + _CUREXT),
+   _CACHE("img/rl" + _CUREXT),
+   _CACHE("img/hz" + _CUREXT),
+   _CACHE("img/lr" + _CUREXT),
    "img/vt" + _CUREXT,
    "img/rl" + _CUREXT,
    "img/hz" + _CUREXT,
@@ -577,11 +593,11 @@ var _CURIMG =
 var _CURIMG64 =
    [
    "img/dw64" + _CUREXT,
-   "img/cr64" + _CUREXT,
-   "img/vt64" + _CUREXT,
-   "img/rl64" + _CUREXT,
-   "img/hz64" + _CUREXT,
-   "img/lr64" + _CUREXT,
+   _CACHE("img/cr64" + _CUREXT),
+   _CACHE("img/vt64" + _CUREXT),
+   _CACHE("img/rl64" + _CUREXT),
+   _CACHE("img/hz64" + _CUREXT),
+   _CACHE("img/lr64" + _CUREXT),
    "img/vt64" + _CUREXT,
    "img/rl64" + _CUREXT,
    "img/hz64" + _CUREXT,
@@ -602,18 +618,18 @@ var _CURIMG0 =
    ];
 var _PLTEIMG =
    [
-   "img/plte0.png",
-   "img/plte2.png"
+   _CACHE("img/plte0.png"),
+   _CACHE("img/plte2.png")
    ];
 var _UNDOIMG =
    [
-   "img/undo3.png",
-   "img/undo0.png"
+   _CACHE("img/undo3.png"),
+   _CACHE("img/undo0.png")
    ];
 var _REDOIMG =
    [
-   "img/redo3.png",
-   "img/redo0.png"
+   _CACHE("img/redo3.png"),
+   _CACHE("img/redo0.png")
    ];
 var _LBIMG = [];
 
@@ -621,44 +637,44 @@ var _LBIMG = [];
       {
       _LBIMG[__s] =
          [
-         "img/l" + (__s + 1) + "0.png",
-         "img/l" + (__s + 1) + "2.png"
+         _CACHE("img/l" + (__s + 1) + "0.png"),
+         _CACHE("img/l" + (__s + 1) + "2.png")
          ];
       }
 
    _LBIMG[_LSL] =
       [
-      "img/ll0.png",
-      "img/ll2.png"
+      _CACHE("img/ll0.png"),
+      _CACHE("img/ll2.png")
       ];
 var _RULEOF = " / ";
-var _DWCUR = "img/dw" + _CUREXT;
-var _PTCUR = "img/pt" + _CUREXT;
-var _PHCUR = "img/ph" + _CUREXT;
-var _DW64CUR = "img/dw64" + _CUREXT;
-var _PT64CUR = "img/pt64" + _CUREXT;
-var _PH64CUR = "img/ph64" + _CUREXT;
+var _DWCUR = _CACHE("img/dw" + _CUREXT);
+var _PTCUR = _CACHE("img/pt" + _CUREXT);
+var _PHCUR = _CACHE("img/ph" + _CUREXT);
+var _DW64CUR = _CACHE("img/dw64" + _CUREXT);
+var _PT64CUR = _CACHE("img/pt64" + _CUREXT);
+var _PH64CUR = _CACHE("img/ph64" + _CUREXT);
 var _DW0CUR = _CROSSHAIR;
 var _PT0CUR = _CROSSHAIR;
 var _PH0CUR = _DEFAULT;
 var _CURSCLIMG =
    [
-   "img/cur32a.png",
-   "img/cur32b.png"
+   _CACHE("img/cur32a.png"),
+   _CACHE("img/cur32b.png")
    ];
 var _CURSCLIMG64 =
    [
-   "img/cur64a.png",
-   "img/cur64b.png"
+   _CACHE("img/cur64a.png"),
+   _CACHE("img/cur64b.png")
    ];
-var _PTRCUR = "img/ptr.png";
+var _PTRCUR = _CACHE("img/ptr.png");
 var _COMMA = " , ";
 var _RECT_L = "[ ";
 var _RECT_R = " ]";
 var _OUT = "-- , --";
 var _OUT2 = "[ -- , -- ]";
-var _CPY = "img/copy.png";
-var _CPY2 = "img/copy2.png";
+var _CPY = _CACHE("img/copy.png");
+var _CPY2 = _CACHE("img/copy2.png");
 
 var _TYPE_IX = _ENUMS(0);
 var _A_ICO1 = _ENUMS();
