@@ -1,5 +1,5 @@
 ﻿/*
- * 1.2.250.0
+ * 1.2.251.0
  * COPYRIGHT (c) 2017 mScroll
  */
 
@@ -1729,6 +1729,8 @@ var _Ms_filename;
       }
    else
       {
+      n = o === 0x18;
+
       for (f = w[_LENGTH] , s = k; 0 <= s; s -= z , f -= z)
          {
          for (t = s; t < f; t += r)

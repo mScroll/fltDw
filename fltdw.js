@@ -1,6 +1,6 @@
 ﻿/*
  * mScrollFltDw
- * 1.1.89.0
+ * 1.1.90.0
  * COPYRIGHT (c) 2017 mScroll
  */
 
@@ -10156,6 +10156,13 @@ var _KEYUP_FUNC = function (K_)
    if (K_ >= 37 && K_ <= 40)
       {
       _Scrl = _EOF;
+      }
+   else if (K_ === 76)
+      {
+      if (_Flk)
+         {
+         nw.mScrollNwOpen("fltdw.htm", 900, 675);
+         }
       }
    };
 
