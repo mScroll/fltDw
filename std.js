@@ -1,5 +1,5 @@
 ﻿/*
- * 2.1.989.0
+ * 2.1.990.0
  * COPYRIGHT (c) 2017 mScroll
  */
 
@@ -160,9 +160,11 @@ var _WEBKIT;
 var _MSIE;
 var _TRIDENT;
 var _EDGE;
+var _EDG;
 var _SEMICOLON;
 var _MSIE_VERSION;
 var _MS_EDGE;
+var _MS_EDG;
 var _SEMICOLON_SPACE;
 var _EQUAL;
 var _STORAGE_WORDS;
@@ -1562,9 +1564,11 @@ var _Length;
 /* static const string */ _MSIE = "MSIE ";
 /* static const string */ _TRIDENT = "Trident/";
 /* static const string */ _EDGE = "Edge/";
+/* static const string */ _EDG = "Edg/";
 /* static const string */ _SEMICOLON = ";";
 
    __v = __u[_INDEXOF](_MSIE, 0);
+   __w = __u[_INDEXOF](_EDG, 0) !== _EOF;
 
    if (__v !== _EOF)
       {
@@ -1585,6 +1589,7 @@ var _Length;
 
 /* static const int */ _MSIE_VERSION = __u;
 /* static const bool */ _MS_EDGE = __v;
+/* static const bool */ _MS_EDG = __w;
 /* static const string */ _SEMICOLON_SPACE = "; ";
 /* static const string */ _EQUAL = "=";
 /* static const size_t */ _STORAGE_WORDS = 384;
@@ -4335,6 +4340,7 @@ var _Length;
 /* const bool */ _STD_HTML.webkit = _WEBKIT;
 /* const int */ _STD_HTML.msie_version = _MSIE_VERSION;
 /* const bool */ _STD_HTML.ms_edge = _MS_EDGE;
+/* const bool */ _STD_HTML.ms_edg = _MS_EDG;
 /* const size_t */ _STD_HTML.position = _POSITION;
 /* const size_t */ _STD_HTML.width = _WIDTH;
 /* const size_t */ _STD_HTML.height = _HEIGHT;
@@ -4524,7 +4530,7 @@ var _Length;
 
 /* string */ _STD_HTML.get_persistent =
 
-      _MSIE_VERSION === 0 ? function (/* string */Prefix_) /* const */
+      ! _MS_EDG && _MSIE_VERSION === 0 ? function (/* string */Prefix_) /* const */
    {
    var u;
 
@@ -4575,7 +4581,7 @@ var _Length;
 
 /* void */ _STD_HTML.set_persistent =
 
-      _MSIE_VERSION === 0 ? function (Prefix_, Base64_)
+      ! _MS_EDG && _MSIE_VERSION === 0 ? function (Prefix_, Base64_)
       /*
        * (string Prefix_)
        * (string Prefix_, string Base64_)
