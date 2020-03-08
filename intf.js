@@ -1,5 +1,5 @@
 ﻿/*
- * 1.2.251.0
+ * 1.2.252.0
  * COPYRIGHT (c) 2017 mScroll
  */
 
@@ -729,7 +729,7 @@ var _Ms_filename;
       _Zip_name = Args_[2];
       _Zip_file = Args_[3];
       _Zip_cmd = Args_[_LENGTH] < 5 ? [] : Args_[4];
-      _Zip_cmdm = _Zip_cmd[_LENGTH] === 5 && typeof _Zip_cmd[0] !== _TYPEOF_ARRAY;
+      _Zip_cmdm = 0 in _Zip_cmd && typeof _Zip_cmd[0] !== _TYPEOF_ARRAY;
       _Zip_fp = 0;
       _Zip_fs = _Zip_name[_LENGTH];
       _Zip_fo = [];
