@@ -1,6 +1,6 @@
 ﻿/*
  * mScrollFltDw
- * 1.1.92.0
+ * 1.1.93.0
  * COPYRIGHT (c) 2017 mScroll
  */
 
@@ -527,6 +527,11 @@ var _COLCMD =
    [
    "変更",
    "選択"
+   ];
+var _COLCMD2 =
+   [
+   "追加",
+   "統合"
    ];
 var _COLTYPESTR =
    [
@@ -6628,12 +6633,14 @@ var _CMDSTL = function (R_, G_, B_, A_)
          if (_Ps < 768)
             {
             _SETVALUE(_COLADD,
+               _INNERHTML, _COLCMD2[0],
                _COLOR, _BLUE,
                _TEXT_DECORATION, _UNDERLINE);
             }
          else
             {
             _SETVALUE(_COLADD,
+               _INNERHTML, _COLCMD2[0],
                _COLOR, _GRAY,
                _TEXT_DECORATION, _NONE);
             }
@@ -6644,9 +6651,21 @@ var _CMDSTL = function (R_, G_, B_, A_)
             _INNERHTML, _COLCMD[1],
             _COLOR, _BLUE,
             _TEXT_DECORATION, _UNDERLINE);
-         _SETVALUE(_COLADD,
-            _COLOR, _GRAY,
-            _TEXT_DECORATION, _NONE);
+
+         if (_Fp && _Addix !== _Cidx && _M3[_Addix] < _Ps)
+            {
+            _SETVALUE(_COLADD,
+               _INNERHTML, _COLCMD2[1],
+               _COLOR, _BLUE,
+               _TEXT_DECORATION, _UNDERLINE);
+            }
+         else
+            {
+            _SETVALUE(_COLADD,
+               _INNERHTML, _COLCMD2[0],
+               _COLOR, _GRAY,
+               _TEXT_DECORATION, _NONE);
+            }
          }
       }
    else if ((R_ | G_ << 8 | B_ << 16 | A_ << 24) >>> 0 !== _Cbuf)
@@ -7922,6 +7941,12 @@ var _COLCHANGE_FUNC = function ()
 
 var _COLADD_FUNC = function ()
    {
+   var u;
+   var v;
+   var w;
+   var s;
+   var t;
+
    if (_Flk && _GETVALUE(_COLADD, _COLOR) === _BLUE)
       {
       if (_Pen === _P_COLCS)
@@ -7941,20 +7966,50 @@ var _COLADD_FUNC = function ()
       else if (_Pen === _P_COLPT)
          {
          _Pen = _Penbuf;
-         _Addix = _D3[_Ps];
-         _ADD(_Addix, _Cnew & 0xFF, _Cnew >>> 8 & 0xFF, _Cnew >>> 16 & 0xFF, _Cnew >>> 24);
 
-         if (_Fp)
+         if (_GETVALUE(_COLADD, _INNERHTML) === _COLCMD2[0])
             {
-            _Lc = _Addix;
+            _Addix = _D3[_Ps];
+            _ADD(_Addix, _Cnew & 0xFF, _Cnew >>> 8 & 0xFF, _Cnew >>> 16 & 0xFF, _Cnew >>> 24);
+
+            if (_Fp)
+               {
+               _Lc = _Addix;
+               }
+            else
+               {
+               _Lcol = _Cnew;
+               }
+
+            _DWCS();
+            _DWPT();
             }
          else
             {
-            _Lcol = _Cnew;
+            _CLEAR_R();
+            _PUSH(_Lp, true, true, true, false, false);
+            u = _Lyr[0][_LENGTH];
+
+            for (s = 0; s < _LSL; ++ s)
+               {
+               v = _Lyr[s];
+               w = new _UINT8ARRAY(u);
+
+               for (t = 0; t < u; ++ t)
+                  {
+                  w[t] = v[t] === _Addix ? _Cidx : v[t];
+                  }
+
+               _Lyr[s] = w;
+               }
+
+            _Lc = _Cidx;
+            _DWCS();
+            _BLEND();
+            _SCALE([_Mtx[_BX], _Mtx[_BY]]);
+            _SWLB();
             }
 
-         _DWCS();
-         _DWPT();
          _SETVALUE(_COLORCOV,
             _DISPLAY, _NONE);
          _SETVALUE(_COLORBG,
@@ -9464,8 +9519,16 @@ var _CMD_CUR_FUNC = function ()
 
       if (_Cur >= _Curimg[_LENGTH] - 1)
          {
-         _Auto = true;
-         _Cur = 0;
+         if (_Auto)
+            {
+            _Auto = false;
+            _Cur = 1;
+            }
+         else
+            {
+            _Auto = true;
+            _Cur = 0;
+            }
          }
       else
          {

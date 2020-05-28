@@ -1,5 +1,5 @@
 ﻿/*
- * 1.2.252.0
+ * 1.2.253.0
  * COPYRIGHT (c) 2017 mScroll
  */
 
@@ -1953,7 +1953,7 @@ var _Ms_filename;
       {
       r = P_[_CHARCODEAT](s);
       x[t] = r;
-      x[t + 1] = r >> _BITS_CHAR;
+      x[t + 1] = r >>> _BITS_CHAR;
       }
 
    u = new _UINT8ARRAY(16 + x[_LENGTH]);
@@ -2441,10 +2441,17 @@ var _Ms_filename;
       }
    };
 
-/* char[] */ intf.base64 = function (/* const char[] */Data_) /* const */
+/* char[] */ intf.base64 = function (Data_, Short_) /* const */
+      /*
+       * (const char[] Data_)
+       * (const char[] Data_, bool Short_)
+       */
    {
    var u;
-   var v = new _VECTOR();
+   var v = arguments[_LENGTH] === 2 && Short_ ?
+         new _VECTOR(new _UINT8ARRAY(0))
+      :
+         new _VECTOR();
    var w = 0;
    var x = 0;
 
@@ -2486,9 +2493,16 @@ var _Ms_filename;
    return (v.data());
    };
 
-/* char[] */ intf.dec64 = function (/* const char[] */Base64_) /* const */
+/* char[] */ intf.dec64 = function (Base64_, Short_) /* const */
+      /*
+       * (const char[] Base64_)
+       * (const char[] Base64_, bool Short_)
+       */
    {
-   var u = new _VECTOR();
+   var u = arguments[_LENGTH] === 2 && Short_ ?
+         new _VECTOR(new _UINT8ARRAY(0))
+      :
+         new _VECTOR();
    var v;
    var w = 0;
    var x = 0;
@@ -2983,14 +2997,17 @@ var _Ms_filename;
    j = new _UINT8ARRAY(16);
    _CRYPTO[_GETRANDOMVALUES](j);
    x = intf.base64(_CFBCIPHER(
-      j, _CFB_IV(v, [0xFE, 0xA7, 0xD2, 0x76, 0x3B, 0x4B, 0x9E, 0x79], 32), [], w));
+      j, _CFB_IV(v, [0xFE, 0xA7, 0xD2, 0x76, 0x3B, 0x4B, 0x9E, 0x79], 32), [], w),
+      true);
    y = intf.base64(_CFBCIPHER(
-      _CFB_IV(j, [], 64), _CFB_IV(v, [0xD7, 0xAA, 0x0F, 0x6D, 0x30, 0x61, 0x34, 0x4E], 32), [], w));
+      _CFB_IV(j, [], 64), _CFB_IV(v, [0xD7, 0xAA, 0x0F, 0x6D, 0x30, 0x61, 0x34, 0x4E], 32), [], w),
+      true);
    j = new _UINT8ARRAY(32);
    _CRYPTO[_GETRANDOMVALUES](j);
    z = intf.base64(_CFBCIPHER(
-      j, _CFB_IV(v, [0x14, 0x6E, 0x0B, 0xE7, 0xAB, 0xAC, 0xD0, 0xD6], 32), [], w));
-   w = intf.base64(w);
+      j, _CFB_IV(v, [0x14, 0x6E, 0x0B, 0xE7, 0xAB, 0xAC, 0xD0, 0xD6], 32), [], w),
+      true);
+   w = intf.base64(w, true);
    r = new _UINT8ARRAY(16);
    _CRYPTO[_GETRANDOMVALUES](r);
    f = [];
@@ -2998,7 +3015,8 @@ var _Ms_filename;
    v = new _UINT8ARRAY(64);
    _CRYPTO[_GETRANDOMVALUES](v);
    q = intf.base64(_CFBCIPHER(
-      v, j, f, _CFB_IV(r, [0x5F, 0xB2, 0xAD, 0x01, 0x0C, 0xB9, 0xE1, 0xF6], 16)));
+      v, j, f, _CFB_IV(r, [0x5F, 0xB2, 0xAD, 0x01, 0x0C, 0xB9, 0xE1, 0xF6], 16)),
+      true);
    o = new _UINT8ARRAY(o);
    i = File_[_LENGTH] & 0xFFFFFFFF;
    h = _FLOOR(File_[_LENGTH] / 0x100000000);
@@ -3051,8 +3069,9 @@ var _Ms_filename;
    g = intf.hmac_a0(p, h, intf.sha512i, intf.sha512a);
    intf.hmac_a(p, g, o, 128 + o[_LENGTH], i, true, intf.sha512i, intf.sha512a, 128);
    p = intf.base64(_CFBCIPHER(
-      p, j, f, _CFB_IV(r, [0xA0, 0x67, 0x7F, 0x02, 0xB2, 0x2C, 0x84, 0x33], 16)));
-   r = intf.base64(r);
+      p, j, f, _CFB_IV(r, [0xA0, 0x67, 0x7F, 0x02, 0xB2, 0x2C, 0x84, 0x33], 16)),
+      true);
+   r = intf.base64(r, true);
    u.ate(0x00040004, _DIGITS);
    u.ate(0x00000040, _DIGITS);
    v = intf.utf8(
@@ -3172,7 +3191,7 @@ var _Ms_filename;
       x[s] = MsCfb_.read(_BITS_CHAR);
       }
 
-   x = intf.dec64(x);
+   x = intf.dec64(x, true);
 
    if (x[_LENGTH] !== 16)
       {
@@ -3187,7 +3206,7 @@ var _Ms_filename;
       y[s] = MsCfb_.read(_BITS_CHAR);
       }
 
-   y = intf.dec64(y);
+   y = intf.dec64(y, true);
 
    if (y[_LENGTH] !== 64)
       {
@@ -3202,7 +3221,7 @@ var _Ms_filename;
       z[s] = MsCfb_.read(_BITS_CHAR);
       }
 
-   z = intf.dec64(z);
+   z = intf.dec64(z, true);
 
    if (z[_LENGTH] !== 64)
       {
@@ -3217,7 +3236,7 @@ var _Ms_filename;
       r[s] = MsCfb_.read(_BITS_CHAR);
       }
 
-   r = intf.dec64(r);
+   r = intf.dec64(r, true);
 
    if (r[_LENGTH] !== 16)
       {
@@ -3232,7 +3251,7 @@ var _Ms_filename;
       q[s] = MsCfb_.read(_BITS_CHAR);
       }
 
-   q = intf.dec64(q);
+   q = intf.dec64(q, true);
 
    if (q[_LENGTH] !== 16)
       {
@@ -3247,7 +3266,7 @@ var _Ms_filename;
       p[s] = MsCfb_.read(_BITS_CHAR);
       }
 
-   p = intf.dec64(p);
+   p = intf.dec64(p, true);
 
    if (p[_LENGTH] !== 64)
       {
@@ -3262,7 +3281,7 @@ var _Ms_filename;
       o[s] = MsCfb_.read(_BITS_CHAR);
       }
 
-   o = intf.dec64(o);
+   o = intf.dec64(o, true);
 
    if (o[_LENGTH] !== 32)
       {
