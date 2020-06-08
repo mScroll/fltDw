@@ -1,6 +1,6 @@
 ﻿/*
  * mScrollFltDw
- * 1.1.93.0
+ * 1.1.94.0
  * COPYRIGHT (c) 2017 mScroll
  */
 

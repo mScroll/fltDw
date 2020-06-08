@@ -1,5 +1,5 @@
 ﻿/*
- * 1.2.253.0
+ * 1.2.254.0
  * COPYRIGHT (c) 2017 mScroll
  */
 
@@ -59,6 +59,7 @@ var _BYTELENGTH = "byteLength";
 var _NAME = "name";
 var _RESULT = "result";
 var _LASTMODIFIED = "lastModified";
+var _LASTMODIFIEDDATE = "lastModifiedDate";
 var _SIZE = "size";
 var _ONLOAD = "onload";
 var _ONABORT = "onabort";
@@ -2426,13 +2427,30 @@ var _Ms_filename;
       }
    };
 
-/* void */ intf.read = function (/* const T */File_)
+/* void */ intf.read =
+
+      _MS_EDGE || _MSIE_VERSION === 0 ? function (/* const T */File_)
    {
    if (_Load)
       {
       _Load = false;
       _Name = File_[_NAME];
       _Time = File_[_LASTMODIFIED];
+      _Reader = new _FILEREADER();
+      _Reader[_ONLOAD] = _LOAD2;
+      _Reader[_ONABORT] = _ERROR2;
+      _Reader[_ONERROR] = _ERROR2;
+      _Reader[_READASARRAYBUFFER](File_);
+      }
+   }
+
+      : function (/* const T */File_)
+   {
+   if (_Load)
+      {
+      _Load = false;
+      _Name = File_[_NAME];
+      _Time = File_[_LASTMODIFIEDDATE][_GETTIME]();
       _Reader = new _FILEREADER();
       _Reader[_ONLOAD] = _LOAD2;
       _Reader[_ONABORT] = _ERROR2;
