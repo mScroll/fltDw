@@ -1,6 +1,6 @@
 ﻿/*
  * mScrollFltDw
- * 1.1.94.0
+ * 1.1.95.0
  * COPYRIGHT (c) 2017 mScroll
  */
 
@@ -1059,6 +1059,7 @@ var _Scrl;
 var _Scrl2;
 var _Scrl_d;
 var _Sd;
+var _Buf;
 var _Rect;
 var _Rect2;
 var _Rect_b;
@@ -1359,7 +1360,7 @@ var _COPY = function ()
    {
    var s;
 
-   _Rd = new _UINT8ARRAY(_Dt[_LENGTH]);
+   _Rd = _Buf;
 
    for (s = 0; s < _Rd[_LENGTH]; ++ s)
       {
@@ -9592,6 +9593,7 @@ var _CDT_FUNC = function (T)
                else if (_Pen === _P_RECT && _Rect)
                   {
                   _Ctl = false;
+                  _Buf = new _UINT8ARRAY(_Dt[_LENGTH]);
                   _Rect2 = 1;
                   _Sdx = _Cdt_t[_X] - _Rs[_X];
                   _Sdy = _Cdt_t[_Y] - _Rs[_Y];
