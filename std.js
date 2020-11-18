@@ -1,5 +1,5 @@
 ﻿/*
- * 2.1.990.0
+ * 2.1.991.0
  * COPYRIGHT (c) 2017 mScroll
  */
 
@@ -181,6 +181,8 @@ var _SPAN;
 var _A;
 var _LABEL;
 var _CANVAS;
+var _DIV;
+var _TABLE;
 var _WAV_AUDIO;
 var _GENERIC_AUDIO;
 var _SPAN_ID;
@@ -203,6 +205,12 @@ var _BRACKET_LABEL;
 var _LABEL_END;
 var _CANVAS_ID;
 var _BRACKET_CANVAS;
+var _DIV_ID;
+var _BRACKET_DIV;
+var _DIV_END;
+var _TABLE_ID;
+var _BRACKET_TABLE;
+var _TABLE_END;
 var _COLON;
 var _QUOTE;
 var _SPACE;
@@ -1614,6 +1622,8 @@ var _Length;
 /* static const int */ _A = __u ++;
 /* static const int */ _LABEL = __u ++;
 /* static const int */ _CANVAS = __u ++;
+/* static const int */ _DIV = __u ++;
+/* static const int */ _TABLE = __u ++;
 /* static const int */ _WAV_AUDIO = __u ++;
 /* static const int */ _GENERIC_AUDIO = __u ++;
 /* static const string */ _SPAN_ID = '<span id="';
@@ -1636,6 +1646,12 @@ var _Length;
 /* static const string */ _LABEL_END = "</label>";
 /* static const string */ _CANVAS_ID = '<canvas id="';
 /* static const string */ _BRACKET_CANVAS = '"></canvas>';
+/* static const string */ _DIV_ID = '<div id="';
+/* static const string */ _BRACKET_DIV = '"></div>';
+/* static const string */ _DIV_END = "</div>";
+/* static const string */ _TABLE_ID = '<table id="';
+/* static const string */ _BRACKET_TABLE = '"></table>';
+/* static const string */ _TABLE_END = "</table>";
 /* static const string */ _COLON = ":";
 /* static const string */ _QUOTE = "'";
 /* static const string */ _SPACE = " ";
@@ -4530,7 +4546,7 @@ var _Length;
 
 /* string */ _STD_HTML.get_persistent =
 
-      ! _MS_EDG && _MSIE_VERSION === 0 ? function (/* string */Prefix_) /* const */
+      _MSIE_VERSION === 0 ? function (/* string */Prefix_) /* const */
    {
    var u;
 
@@ -4581,7 +4597,7 @@ var _Length;
 
 /* void */ _STD_HTML.set_persistent =
 
-      ! _MS_EDG && _MSIE_VERSION === 0 ? function (Prefix_, Base64_)
+      _MSIE_VERSION === 0 ? function (Prefix_, Base64_)
       /*
        * (string Prefix_)
        * (string Prefix_, string Base64_)
@@ -4884,6 +4900,58 @@ var _Length;
    u += _Id[Elemid_];
 
    return (u += _BRACKET_CANVAS);
+   };
+
+/* string */ _STD_HTML.div = function (Elemid_, Html_)
+      /*
+       * (size_t Elemid_)
+       * (size_t Elemid_, string Html_)
+       */
+   {
+   var u = _DIV_ID;
+
+   _Tagname[Elemid_] = _DIV;
+   _Id[Elemid_] = _IDPREFIX;
+   _Id[Elemid_] += Elemid_;
+   u += _Id[Elemid_];
+
+   if (arguments[_LENGTH] === 1)
+      {
+      return (u += _BRACKET_DIV);
+      }
+   else
+      {
+      u += _QUOTES_BRACKET;
+      u += Html_;
+      }
+
+   return (u += _DIV_END);
+   };
+
+/* string */ _STD_HTML.table = function (Elemid_, Html_)
+      /*
+       * (size_t Elemid_)
+       * (size_t Elemid_, string Html_)
+       */
+   {
+   var u = _TABLE_ID;
+
+   _Tagname[Elemid_] = _TABLE;
+   _Id[Elemid_] = _IDPREFIX;
+   _Id[Elemid_] += Elemid_;
+   u += _Id[Elemid_];
+
+   if (arguments[_LENGTH] === 1)
+      {
+      return (u += _BRACKET_TABLE);
+      }
+   else
+      {
+      u += _QUOTES_BRACKET;
+      u += Html_;
+      }
+
+   return (u += _TABLE_END);
    };
 
 /* void */ _STD_HTML.flush = function (Title_, Html_, T, Height_)
