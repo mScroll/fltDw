@@ -1,5 +1,5 @@
 ﻿/*
- * 1.2.254.0
+ * 1.2.255.0
  * COPYRIGHT (c) 2017 mScroll
  */
 
@@ -4584,8 +4584,9 @@ var _Ms_filename;
    var t;
 
    u = O_ + 64;
+   F_ = F_ && u >= M_[_LENGTH];
 
-   if (F_ && u >= M_[_LENGTH])
+   if (F_)
       {
       r = 64 - M_[_LENGTH] % 64;
 
@@ -4650,7 +4651,7 @@ var _Ms_filename;
                   g[s] |= M_[O_] << t;
                   ++ O_;
                   }
-               else if (q < r[_LENGTH])
+               else if (F_ && q < r[_LENGTH])
                   {
                   g[s] |= r[q] << t;
                   ++ q;
@@ -4829,8 +4830,9 @@ var _Ms_filename;
    var t;
 
    u = O_ + 128;
+   F_ = F_ && u >= M_[_LENGTH];
 
-   if (F_ && u >= M_[_LENGTH])
+   if (F_)
       {
       r = 128 - M_[_LENGTH] % 128;
 
@@ -4918,7 +4920,7 @@ var _Ms_filename;
                   g[s] |= M_[O_] << t;
                   ++ O_;
                   }
-               else if (q < r[_LENGTH])
+               else if (F_ && q < r[_LENGTH])
                   {
                   g[s] |= r[q] << t;
                   ++ q;
@@ -4938,7 +4940,7 @@ var _Ms_filename;
                   ug[s] |= M_[O_] << t;
                   ++ O_;
                   }
-               else if (q < r[_LENGTH])
+               else if (F_ && q < r[_LENGTH])
                   {
                   ug[s] |= r[q] << t;
                   ++ q;
@@ -5181,6 +5183,7 @@ var _Ms_filename;
       }
    else if (P_[_LENGTH] > Hs_)
       {
+      D_ = new _UINT8ARRAY(D_[_LENGTH]);
       Hi_(D_);
 
       for (s = 0; s < P_[_LENGTH]; s += Hs_)

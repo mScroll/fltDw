@@ -1,6 +1,6 @@
 ﻿/*
  * mScrollFltDw
- * 1.1.96.0
+ * 1.1.97.0
  * COPYRIGHT (c) 2017 mScroll
  */
 
@@ -12594,3 +12594,7 @@ fltdw.load = function ()
 _WINDOW[_ONLOAD] = fltdw.load;
 
 })(fltdw);
+
+
+
+/* EOF */
