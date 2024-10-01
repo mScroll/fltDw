@@ -6,8 +6,6 @@ fltDw は、Web ブラウザで利用できる簡単な画像編集ツールで�
   
 ダウンロード、使用方法および更新履歴は公式サイトよりご確認ください。  
 [https://www.mscroll.net/fltDw/](https://www.mscroll.net/fltDw/)  
-※次の URL も利用可能です。  
-[https://ae.mscroll.net/fltDw/](https://ae.mscroll.net/fltDw/)  
   
 ## 使用条件  
 以下の使用条件をご確認ください。  
